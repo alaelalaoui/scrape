@@ -35,7 +35,7 @@ def show_answer():
         answer_text.delete("1.0", tk.END)
         answer_text.insert(tk.END, answers_text)
     else:
-        answer_label.config(text="Please enter a question.")
+        answer_text.config(text="Please enter a question.")
 
 
 root = tk.Tk()

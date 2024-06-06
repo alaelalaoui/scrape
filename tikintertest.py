@@ -3,6 +3,7 @@ from tkinter import ttk
 from bs4 import BeautifulSoup
 import requests
 
+
 def fetch_stackoverflow_answer(url):
     page_to_scrape = requests.get(url)
     soup = BeautifulSoup(page_to_scrape.text, "html.parser")
@@ -12,18 +13,17 @@ def fetch_stackoverflow_answer(url):
         p = question_div.find('p')
         if p:
             question_text = p.text
-    
-    
     answers_div = soup.find('div', id="answers")
     answers_texts = []
+    
     if answers_div:
         answer_divs = answers_div.find_all('div', class_='answer', limit=3)
         for index, answer_div in enumerate(answer_divs):
             paragraphs = answer_div.find_all('p')
             answer_text = "\n".join(p.text for p in paragraphs)
             answers_texts.append(f"Answer {index + 1}:\n{answer_text}\n")
-    
     return question_text, answers_texts
+
 
 def show_answer():
     question = text_entry.get("1.0", "end-1c")
